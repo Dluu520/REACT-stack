@@ -2,7 +2,7 @@
 // useState -> form fields, each one with component level state
 import { useState, useEffect } from 'react'
 import { FaUser } from 'react-icons/fa'
-function Register() {
+function Login() {
   //imitate each field in separeate piece of state with object of formData and setFormData
   const [formData, setFormData] = useState({
     name: '',
@@ -79,4 +79,4 @@ function Register() {
 
 }
 
-export default Register
+export default Login
