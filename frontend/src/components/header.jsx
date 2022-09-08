@@ -1,33 +1,26 @@
 import { FaSignInAlt, FaSignOutAlt, FaUser } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
-function header() {
-
+function Header() {
     return (
         <header className='header'>
-            <div className='logo'>
-                <Link to='/'>Goal Setter</Link>
+            <div className="logo">
+                <Link to='/'>GoalSetter</Link>
             </div>
-            <ul> {/* unorder list*/}
-                {/* If user is not logged in then see log in or register, if logged in then logout is visible*/}
+            <ul>
                 <li>
                     <Link to='/login'>
-                        <FaSignInAlt>
-                            Login
-                        </FaSignInAlt>
+                        <FaSignInAlt /> Login
                     </Link>
                 </li>
                 <li>
                     <Link to='/register'>
-                        <FaUser>
-                            Register
-                        </FaUser>
+                        <FaUser /> Register
                     </Link>
                 </li>
-                
             </ul>
         </header>
     )
 }
 
-export default header
+export default Header

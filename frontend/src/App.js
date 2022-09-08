@@ -11,6 +11,7 @@ function App() {
     <>
       <Router>
         <div className='container'>
+          {/* imported from Header  */}
           <Header />
           <Routes>
             <Route path='/' element={<Dashboard />} />
