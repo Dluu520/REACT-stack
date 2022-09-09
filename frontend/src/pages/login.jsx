@@ -2,7 +2,14 @@
 // useState -> form fields, each one with component level state
 import { useState, useEffect } from 'react'
 import { FaSignInAlt } from 'react-icons/fa'
-function Register() {
+
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+
+import { login, reset } from '../features/auth/authSlice'
+import spinner from '../components/spinner'
+function Login() {
 
 
   //imitate each field in separeate piece of state with object of formData and setFormData
@@ -17,6 +24,26 @@ function Register() {
   //destructure fields from above from formData
   const {email, password} = formData
 
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  )
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message)
+    }
+
+    if (isSuccess || user) {
+      navigate('/')
+    }
+
+    dispatch(reset())
+  }, [user, isError, isSuccess, message, navigate, dispatch])
+
+
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -25,11 +52,22 @@ function Register() {
   }
   const onSubmit = (e) => {
     e.preventDefault()
+
+    const userData = {
+      email, 
+      password
+    }
+    dispatch(login(userData))
   }
+
+  if(isLoading){
+    return <spinner/>
+  }
+
   return <>
     <section>
       <h1>
-        <FaSignInAlt /> Register
+        <FaSignInAlt /> Login
       </h1>
       <p>User Login</p>
     </section>
@@ -65,4 +103,4 @@ function Register() {
 
 }
 
-export default Register
+export default Login

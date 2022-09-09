@@ -6,22 +6,24 @@ import { FaUser } from 'react-icons/fa'
 import { register, reset } from '../features/auth/authSlice'
 import spinner from '../components/spinner'
 
+import { NativeBuffer } from 'mongoose'
+
+
 function Register() {
+  //imitate each field in separeate piece of state with object of formData and setFormData
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    password: '',
-    password2: '',
-  })
+    password: '', //take initial password
+    password2: '' //confirm password
+  }) // this conclude state for the form
 
+
+  //destructure fields from above from formData
   const { name, email, password, password2 } = formData
-
-  const navigate = useNavigate()
+  const navigate = useNavigate
   const dispatch = useDispatch()
-
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.auth
-  )
+  const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth)
 
   useEffect(() => {
     if (isError) {
@@ -41,6 +43,7 @@ function Register() {
       [e.target.name]: e.target.value,
     }))
   }
+
 
   const onSubmit = (e) => {
     e.preventDefault()
@@ -127,5 +130,6 @@ function Register() {
     </>
   )
 }
+
 
 export default Register

@@ -38,7 +38,7 @@ const registerUser = asyncHandler(async (req, res) => {
       _id: user.id,
       name: user.name,
       email: user.email,
-      //register user and pass id in token generator
+      //register user and pass id in token generator and into local storage
       token: generateToken(user._id),
     })
   } else {
