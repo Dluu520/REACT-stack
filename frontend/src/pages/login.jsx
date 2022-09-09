@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { login, reset } from '../features/auth/authSlice'
-import spinner from '../components/spinner'
+import Spinner from '../components/spinner'
 function Login() {
 
 
@@ -61,7 +61,7 @@ function Login() {
   }
 
   if(isLoading){
-    return <spinner/>
+    return <Spinner/>
   }
 
   return <>

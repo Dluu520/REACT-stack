@@ -74,6 +74,9 @@ const loginUser = asyncHandler(async (req, res) => {
 // @route   GET /api/users/me
 // @access  Private
 const getMe = asyncHandler(async (req, res) => {
+  //this method would not really be used in front end 
+  
+  //send back the user since already found in AuthMiddleware 
   res.status(200).json(req.user)
 })
 

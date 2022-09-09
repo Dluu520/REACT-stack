@@ -43,14 +43,17 @@ const updateGoals = asyncHandler(async (req, res) => {
         res.status(400)
         throw new Error('Goal not found')
     }
-    const user = await User.findById(req.user.id)
+    //dont need to find user again since all we need is the user thats found in AuthMiddleware
+        // const user = await User.findById(req.user.id)
     //check for user
-    if (!user) {
+    if (!req.user) { //changed from !user to req.user once AuthMiddleware implemented
         res.status(401)
         throw new Error('User not found')
     }
     //check if login user matches goal user
-    if (goal.user.toString() !== user.id) {
+    // if (goal.user.toString() !== user.id) { // this is opt out as we implemented AuthMiddleware, otherwise this including line 47 is needed
+    if (goal.user.toString() !== req.user.id) {
+    
         res.status(401)
         throw new Error('User not authorized')
     }
@@ -67,11 +70,15 @@ const updateGoals = asyncHandler(async (req, res) => {
 
 
 })
+
+
 // @desc    Delete Goals
 // @route   DELETE /api/goals
 // @access  Private
 const deleteGoals = asyncHandler(async (req, res) => {
+
     const goal = await Goal.findById(req.params.id)
+    
     if (!goal) {
         res.status(400)
         throw new Error('Goal not found')
